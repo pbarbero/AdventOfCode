@@ -19,7 +19,21 @@ namespace Day2
                 List<decimal> numbers = new List<decimal>();
                 line.Split("\t").ToList().ForEach(x => numbers.Add(Decimal.Parse(x)));
 
-                result += numbers.Max() - numbers.Min();                
+
+                for(int i = 0; i < numbers.Count(); i++)
+                {
+                    for(int j = 0; j < numbers.Count(); j++)
+                    {
+                        if(i != j)
+                        {
+                            if(numbers[i] % numbers[j] == 0)
+                            {
+                                result += numbers[i] / numbers[j];
+                            }
+                        }
+                    }
+                }
+
             }
 
             Console.Write(result);
