@@ -21,7 +21,16 @@ namespace Day2
             while(0 <= i && i < numbers.Count())
             {
                 increment = numbers[i];
-                numbers[i]++;
+
+                if(increment >= 3)
+                {
+                    numbers[i]--;
+                }
+                else
+                {
+                    numbers[i]++;
+                }
+
                 i += increment;
                 steps++;
             }
