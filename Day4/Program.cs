@@ -28,7 +28,8 @@ namespace Day4
         public Phrase(){}
         public Phrase(string line)
         {
-            this.Words = line.Split(" ").ToList();
+            this.Words = new List<string>();
+            line.Split(" ").ToList().ForEach(x => this.Words.Add(String.Concat(x.OrderBy(c => c))));
         }
         public List<string> Words { get; set; }
 
