@@ -11,11 +11,11 @@ namespace Day7
         static void Main(string[] args)
         {
             string currentDirectory = Directory.GetCurrentDirectory();
-            var lines = System.IO.File.ReadAllLines(@currentDirectory + "/data").ToList();
-            List<Tower> towers = new List<Tower>();
+            var lines = System.IO.File.ReadAllLines(@currentDirectory + "/data2").ToList();
 
 
             //Parse data
+            List<Tower> towers = new List<Tower>();
             foreach(string line in lines)
             {                
                 towers.Add(new Tower(line));
@@ -37,10 +37,78 @@ namespace Day7
 
                 Console.WriteLine(result.Name);
 
-                //Part two
-                var childs = towers.SingleOrDefault(x => x.Name == result.Name);
+               
+                //Create tree 
+                CreateTree(result, towers);
+
+                //Get unbalanced node
+                bool hasFinished = false;
+                decimal weigth = GetUnbalancedNode(result, ref hasFinished);
+                Console.WriteLine(weigth);
+
             }
             
+        }
+
+        static decimal GetUnbalancedNode(Tower parent, ref bool hasFinished)
+        {
+            decimal weigth = parent.Weigth;
+            while(!hasFinished)
+            {
+                //Calculates weight for childs
+                List<decimal> weights = new List<decimal>();
+                foreach(var child in parent.Childs)
+                {
+                    weights.Add(child.CalculateWeight());
+                }
+
+
+                if(weights.Count() > 0)
+                {
+                    bool areDiff = weights.Any(o => o != weights[0]);
+                    if(!areDiff)
+                    {
+                        hasFinished = true;
+                        break;
+                    }
+                    else
+                    {
+                        var min = weights.GroupBy(i=>i).OrderByDescending(grp=>grp.Count())
+                            .Select(grp=>grp.Key).OrderByDescending(x => x).First();
+
+                        var index = weights.IndexOf(min);
+
+                        var differentNode = parent.Childs[index];
+
+                        if(differentNode != null)
+                        {
+                            GetUnbalancedNode(differentNode, ref hasFinished);          
+                        }
+                                      
+                    }
+                }
+            }
+            return weigth;
+        }
+
+        static void CreateTree(Tower parent, List<Tower> towers)
+        {  
+            var towerW = towers.FirstOrDefault(x => x.Name == parent.Name);
+            if(towerW != null)
+            {
+                parent.Weigth = towerW.Weigth;
+                
+                if(towerW.Childs != null)
+                {                    
+                    List<string> childNames = towerW.Childs.Select(x => x.Name).ToList();
+                    parent.Childs = new List<Tower>(towers.Where(x => childNames.Contains(x.Name)));
+
+                    foreach(var child in parent.Childs)
+                    {
+                        CreateTree(child, towers);
+                    }
+                }
+            }
         }
     }
 
@@ -82,5 +150,19 @@ namespace Day7
         public string Name {get;set;}
         public decimal Weigth {get;set;}
         public List<Tower> Childs{get;set;}
+
+        public decimal CalculateWeight()
+        {
+            decimal result = this.Weigth;
+            if(this.Childs != null)
+            {
+                foreach(var child in this.Childs)
+                {
+                    result += child.CalculateWeight();
+                }
+            }
+
+            return result;
+        }
     }
 }
