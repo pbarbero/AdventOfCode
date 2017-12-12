@@ -26,6 +26,7 @@ namespace Day12
                 data.Add(key, value);
             }
 
+            //First part
             List<int> alreadyUsed = new List<int>(){0};
             foreach(int value in data[0])
             {
@@ -33,8 +34,23 @@ namespace Day12
                 alreadyUsed.Add(value);
                 GetProgramsRelated(value, ref programs, ref alreadyUsed, data);
             }
+
+            //Second part
+            int groups = 1;
+            foreach(int key in data.Keys)
+            {
+                if(!alreadyUsed.Contains(key))
+                {
+                    foreach(int value in data[key])
+                    {
+                        alreadyUsed.Add(value);
+                        DiscardProgram(value, ref alreadyUsed, data);
+                    }
+                    groups++;
+                }
+            }
             
-            Console.WriteLine(programs);
+            Console.WriteLine(string.Format("Groups: {0}", groups.ToString()));
         }
 
         static void GetProgramsRelated(int key, ref int programs, ref List<int> alreadyUsed, Dictionary<int, List<int>> data)
@@ -49,6 +65,20 @@ namespace Day12
                     GetProgramsRelated(value, ref programs, ref alreadyUsed, data);         
                 }       
             }
+        }
+
+        static void DiscardProgram(int key, ref List<int> alreadyUsed, Dictionary<int, List<int>> data)
+        {
+            foreach(int value in data[key])
+            {
+                if(!alreadyUsed.Contains(value))
+                
+                {
+                    alreadyUsed.Add(value);
+                    DiscardProgram(value, ref alreadyUsed, data);         
+                }       
+            }
+
         }
     }
 }
