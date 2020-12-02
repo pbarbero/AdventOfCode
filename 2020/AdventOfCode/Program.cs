@@ -17,6 +17,12 @@ namespace AdventOfCode
                 var result = ReportRepair.GetExpenseReport(lines.ToDecimals());
                 Console.WriteLine(result);
             }
+            else if(day == "2")
+            {
+                var lines = FileReader.ReadFile(@"../../../input2.txt");
+                var result = PasswordValidation.GetValidPasswords(lines);
+                Console.WriteLine(result);
+            }
             else 
                 Console.WriteLine($"Day '{day}' still not implemented!");
         }

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AdventOfCodeTest
 {
-    public class Day1
+    public class Tests
     {
         [Fact]
         public void Test1()
@@ -14,6 +14,16 @@ namespace AdventOfCodeTest
             var expenseReport = ReportRepair.GetExpenseReport(numbers);
 
             Assert.True(241861950 == expenseReport);
+        }
+
+        [Fact]
+        public void Test2()
+        {
+            var lines = new string[] {"1-3 a: abcde","1-3 b: cdefg","2-9 c: ccccccccc"};
+            var passwordsValid = PasswordValidation.GetValidPasswords(lines);
+
+            // Assert.True(2 == passwordsValid);
+            Assert.True(1 == passwordsValid);
         }
     }
 }
