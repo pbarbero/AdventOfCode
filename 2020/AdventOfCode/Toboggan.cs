@@ -10,14 +10,14 @@ namespace  AdventOfCode
         {
             var forest = lines.ToArray();
 
-            return GetNTrees(forest, 1, 1)
-            * GetNTrees(forest, 3, 1)
-            * GetNTrees(forest, 5, 1)
-            * GetNTrees(forest, 7, 1)
-            * GetNTrees(forest, 1, 2);
+            return forest.GetNTreesInPath(1, 1)
+            * forest.GetNTreesInPath(3, 1)
+            * forest.GetNTreesInPath(5, 1)
+            * forest.GetNTreesInPath(7, 1)
+            * forest.GetNTreesInPath(1, 2);
         }
 
-        private static decimal GetNTrees(string[] forest, int right, int down)
+        private static decimal GetNTreesInPath(this string[] forest, int right, int down)
         {
             var row = 0;
             var column = 0;
@@ -28,9 +28,7 @@ namespace  AdventOfCode
             {
                 if (forest[row][column] == TREE) nTress++;
 
-                column = column + right;
-
-                if (column >= width) column = column - width;
+                column = (column + right >= width) ? column = column + right - width : column + right;
                 row = row + down;
             }
 
