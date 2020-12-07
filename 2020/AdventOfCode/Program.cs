@@ -46,6 +46,18 @@ namespace AdventOfCode
                 var mySeat = Boarding.GetMySeat(lines);
                 Console.WriteLine(mySeat);
             } 
+            else if(day == "6")
+            {
+                var lines = FileReader.ReadFile(@"../../../input6.txt");
+                var mySeat = Customs.GetSumAnyoneYesAnswers(lines);
+                Console.WriteLine(mySeat);
+            }
+            else if(day == "6.2")
+            {
+                var lines = FileReader.ReadFile(@"../../../input6.txt");
+                var mySeat = Customs.GetSumEveryoneYesAnswers(lines);
+                Console.WriteLine(mySeat);
+            }
             else if(day == "7")
             {
                 var lines = FileReader.ReadFile(@"../../../input7.txt");

@@ -133,6 +133,58 @@ namespace AdventOfCodeTest
         }
 
         [Fact]
+        public void Test6()
+        {
+            var lines = new string[]
+            {
+                "abc",
+                Environment.NewLine,
+                "a",
+                "b",
+                "c",
+                Environment.NewLine,
+                "ab",
+                "ac",
+                Environment.NewLine,
+                "a",
+                "a",
+                "a",
+                "a",
+                Environment.NewLine,
+                "b",
+            };
+            var result = Customs.GetSumAnyoneYesAnswers(lines);
+
+            Assert.Equal(11, result);
+        }
+
+        [Fact]
+        public void Test6_Part2()
+        {
+            var lines = new string[]
+            {
+                "abc",
+                Environment.NewLine,
+                "a",
+                "b",
+                "c",
+                Environment.NewLine,
+                "ab",
+                "ac",
+                Environment.NewLine,
+                "a",
+                "a",
+                "a",
+                "a",
+                Environment.NewLine,
+                "b",
+            };
+            var result = Customs.GetSumEveryoneYesAnswers(lines);
+
+            Assert.Equal(6, result);
+        }
+
+        [Fact]
         public void Test7()
         {
             var lines = new string[]
