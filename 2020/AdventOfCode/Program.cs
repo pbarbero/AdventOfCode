@@ -8,8 +8,7 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             Console.WriteLine("Tell me the day!");
-            // var day = Console.ReadLine();
-            var day = "7.2";
+            var day = Console.ReadLine();
 
             if(day == "1")
             {
@@ -35,6 +34,18 @@ namespace AdventOfCode
                 var valids = PasswordValidator.GetNumberOfValids(lines);
                 Console.WriteLine(valids);
             }
+            else if(day == "5")
+            {
+                var lines = FileReader.ReadFile(@"../../../input5.txt");
+                var maxId = Boarding.GetMaxId(lines);
+                Console.WriteLine(maxId);
+            } 
+            else if(day == "5.2")
+            {
+                var lines = FileReader.ReadFile(@"../../../input5.txt");
+                var mySeat = Boarding.GetMySeat(lines);
+                Console.WriteLine(mySeat);
+            } 
             else if(day == "7")
             {
                 var lines = FileReader.ReadFile(@"../../../input7.txt");

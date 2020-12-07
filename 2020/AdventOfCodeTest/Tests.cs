@@ -125,6 +125,14 @@ namespace AdventOfCodeTest
         }
 
         [Fact]
+        public void Test5()
+        {
+            Assert.Equal(567,  Boarding.GetId("BFFFBBFRRR"));
+            Assert.Equal(119, Boarding.GetId("FFFBBBFRRR"));
+            Assert.Equal(820, Boarding.GetId("BBFFBBFRLL"));
+        }
+
+        [Fact]
         public void Test7()
         {
             var lines = new string[]
