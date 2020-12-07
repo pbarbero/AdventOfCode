@@ -9,7 +9,7 @@ namespace AdventOfCode
         {
             Console.WriteLine("Tell me the day!");
             // var day = Console.ReadLine();
-            var day = "4";
+            var day = "7.2";
 
             if(day == "1")
             {
@@ -34,6 +34,18 @@ namespace AdventOfCode
                 var lines = FileReader.ReadFile(@"../../../input4.txt");
                 var valids = PasswordValidator.GetNumberOfValids(lines);
                 Console.WriteLine(valids);
+            }
+            else if(day == "7")
+            {
+                var lines = FileReader.ReadFile(@"../../../input7.txt");
+                var nBags = Haversacks.GetOuterNumberBags(lines);
+                Console.WriteLine(nBags);
+            }
+            else if(day == "7.2")
+            {
+                var lines = FileReader.ReadFile(@"../../../input7.txt");
+                var nBags = Haversacks.GetInnerNumberBags(lines);
+                Console.WriteLine(nBags);
             }
             else 
                 Console.WriteLine($"Day '{day}' still not implemented!");
