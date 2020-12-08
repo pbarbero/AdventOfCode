@@ -220,5 +220,43 @@ namespace AdventOfCodeTest
             var nBags = Haversacks.GetInnerNumberBags(lines);
             Assert.True(126 == nBags, $"Expected: 126. Actual: {nBags}");
         }
+
+        [Fact]
+        public void Test8()
+        {
+            var lines = new string[]{
+                "nop +0",
+                "acc +1",
+                "jmp +4",
+                "acc +3",
+                "jmp -3",
+                "acc -99",
+                "acc +1",
+                "jmp -4",
+                "acc +6",
+            };
+            var result = HandheldGameConsole.GetAccumulatorValue(lines);
+
+            Assert.Equal(5, result.Item2);
+        }
+
+        [Fact]
+        public void Test8_Part2()
+        {
+            var lines = new string[]{
+                "nop +0",
+                "acc +1",
+                "jmp +4",
+                "acc +3",
+                "jmp -3",
+                "acc -99",
+                "acc +1",
+                "jmp -4",
+                "acc +6",
+            };
+            
+            var result = HandheldGameConsole.GetFixedAccumulatorValue(lines);
+            Assert.Equal(8, result);
+        }
     }
 }

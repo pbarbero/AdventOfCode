@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 
 namespace AdventOfCode
 {
@@ -8,7 +9,8 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             Console.WriteLine("Tell me the day!");
-            var day = Console.ReadLine();
+            // var day = Console.ReadLine();
+            var day = "8.2";
 
             if(day == "1")
             {
@@ -69,6 +71,18 @@ namespace AdventOfCode
                 var lines = FileReader.ReadFile(@"../../../input7.txt");
                 var nBags = Haversacks.GetInnerNumberBags(lines);
                 Console.WriteLine(nBags);
+            }
+            else if(day == "8")
+            {
+                var lines = FileReader.ReadFile(@"../../../input8.txt").ToArray();
+                var acc = HandheldGameConsole.GetAccumulatorValue(lines).Item2;
+                Console.WriteLine(acc);
+            }
+            else if(day == "8.2")
+            {
+                var lines = FileReader.ReadFile(@"../../../input8.txt").ToArray();
+                var acc = HandheldGameConsole.GetFixedAccumulatorValue(lines);
+                Console.WriteLine(acc);
             }
             else 
                 Console.WriteLine($"Day '{day}' still not implemented!");
