@@ -258,5 +258,35 @@ namespace AdventOfCodeTest
             var result = HandheldGameConsole.GetFixedAccumulatorValue(lines);
             Assert.Equal(8, result);
         }
+
+        [Fact]
+        public void Test9()
+        {
+            var lines = new string[]
+            {
+                "35", "20", "15", "25", "47", "40", "62", "55", "65",
+                "95", "102","117", "150", "182", "127", "219", "299", "277",
+                "309", "576",
+            };
+
+            var result = EncodingError.GetError(lines, 5);
+
+            Assert.Equal(127, result);
+        }
+
+         [Fact]
+        public void Test9_Part2()
+        {
+            var lines = new string[]
+            {
+                "35", "20", "15", "25", "47", "40", "62", "55", "65",
+                "95", "102","117", "150", "182", "127", "219", "299", "277",
+                "309", "576",
+            };
+
+            var result = EncodingError.GetEncryptionWeakness(lines, 5);
+
+            Assert.Equal(62, result);
+        }
     }
 }
