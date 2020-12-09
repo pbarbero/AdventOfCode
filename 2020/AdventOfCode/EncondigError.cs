@@ -63,8 +63,7 @@ namespace AdventOfCode
         private static bool IsSumInPreamble(this long self, HashSet<long> preambleSet)
         {
             foreach(var number in preambleSet)
-                foreach(var number2 in preambleSet)
-                    if(number + number2 == self) return true;
+                if(preambleSet.Any(number2 => number2 != number && number2 + number == self)) return true;
 
             return false;
         }

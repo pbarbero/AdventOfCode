@@ -8,7 +8,6 @@ namespace AdventOfCode
     {
         internal static IEnumerable<string> ReadFile(string filePath)
         {
-            var frequencies = new List<int>();
             var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), filePath);
 
             return File.ReadLines(path);
