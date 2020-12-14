@@ -9,8 +9,8 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             Console.WriteLine("Tell me the day!");
-            var day = Console.ReadLine();
-            // var day = "8.2";
+            // var day = Console.ReadLine();
+            var day = "11";
 
             if(day == "1")
             {
@@ -95,6 +95,24 @@ namespace AdventOfCode
                 var lines = FileReader.ReadFile(@"../../../input9.txt").ToArray();
                 var encryptionweakness = EncodingError.GetEncryptionWeakness(lines.ToArray(), 25);
                 Console.WriteLine(encryptionweakness);
+            }
+            else if(day == "10")
+            {
+                var lines = FileReader.ReadFile(@"../../../input10.txt").ToArray();
+                var  result = AdapterArray.GetOneDiffAdaptersMultipliedByThreeDiffAdapters(lines);
+                Console.WriteLine(result);
+            }
+            else if(day == "10.2")
+            {
+                var lines = FileReader.ReadFile(@"../../../input10.txt").ToArray();
+                var  result = AdapterArray.GetNumberOfArragements(lines);
+                Console.WriteLine(result);
+            }
+            else if(day == "11")
+            {
+                var lines = FileReader.ReadFile(@"../../../input11.txt").ToArray();
+                var  result = SeatingSystem.GetOccupiedSeatsAtTheEnd(lines);
+                Console.WriteLine(result);
             }
             else 
                 Console.WriteLine($"Day '{day}' still not implemented!");

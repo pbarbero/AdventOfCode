@@ -67,18 +67,5 @@ namespace AdventOfCode
 
             return false;
         }
-
-        private static long[] ToLong(this string[] self)
-        {
-            return self.Select(x => x.ToLong()).ToArray();
-        }
-
-        private static long ToLong(this string self)
-        {
-            var result = (long)0;
-            if(!long.TryParse(self, out result)) 
-                throw new System.Exception($"Number {self} is bad");
-            return result;
-        }
     }
 }
