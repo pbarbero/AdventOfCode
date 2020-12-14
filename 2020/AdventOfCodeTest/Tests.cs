@@ -334,9 +334,31 @@ namespace AdventOfCodeTest
                 "L.LLLLL.LL",
             };
 
-            var result = SeatingSystem.GetOccupiedSeatsAtTheEnd(lines);
+            var result = SeatingSystem.GetOccupiedSeatsAtTheEnd(lines, false);
 
             Assert.Equal(37, result);
+        }
+
+        [Fact]
+        public void Test11_Part2()
+        {
+            var lines = new string[]
+            {
+                "L.LL.LL.LL",
+                "LLLLLLL.LL",
+                "L.L.L..L..",
+                "LLLL.LL.LL",
+                "L.LL.LL.LL",
+                "L.LLLLL.LL",
+                "..L.L.....",
+                "LLLLLLLLLL",
+                "L.LLLLLL.L",
+                "L.LLLLL.LL",
+            };
+
+            var result = SeatingSystem.GetOccupiedSeatsAtTheEnd(lines, true);
+
+            Assert.Equal(26, result);
         }
     }
 }
