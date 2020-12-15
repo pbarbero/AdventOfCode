@@ -1,5 +1,6 @@
 using AdventOfCode;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace AdventOfCodeTest
@@ -359,6 +360,40 @@ namespace AdventOfCodeTest
             var result = SeatingSystem.GetOccupiedSeatsAtTheEnd(lines, true);
 
             Assert.Equal(26, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(Test15_Data))]
+        public void Test15(int expected, params int[] numbers)
+        {
+            Assert.Equal(expected, SpeakingGame.GetPosition(numbers, 2020));
+        }
+
+        [Theory]
+        [MemberData(nameof(Test15_Part2_Data))]
+        public void Test15_Part2(int expected, params int[] numbers)
+        {
+            Assert.Equal(expected, SpeakingGame.GetPosition(numbers, 30000000));
+        }
+
+        public static IEnumerable<object[]> Test15_Data() {
+            yield return new object[] { 436,0,3,6 };
+            yield return new object[] { 1,1,3,2 };
+            yield return new object[] { 10,2,1,3 };
+            yield return new object[] { 27,1,2,3 };
+            yield return new object[] { 78,2,3,1 };
+            yield return new object[] { 438,3,2,1 };
+            yield return new object[] { 1836,3,1,2};
+        }
+
+        public static IEnumerable<object[]> Test15_Part2_Data() {
+            yield return new object[] { 175594,0,3,6 };
+            yield return new object[] { 2578,1,3,2 };
+            yield return new object[] { 3544142,2,1,3 };
+            yield return new object[] { 261214,1,2,3 };
+            yield return new object[] { 6895259,2,3,1 };
+            yield return new object[] { 18,3,2,1};
+            yield return new object[] { 362,3,1,2};
         }
     }
 }
