@@ -17,6 +17,22 @@ namespace AdventOfCode
             return result;
         }
 
+        internal static uint ToUint(this string self)
+        {
+            var result = (uint)0;
+            if(!uint.TryParse(self, out result)) 
+                throw new System.Exception($"Number {self} is bad");
+            return result;
+        }
+
+        internal static ulong ToUlong(this string self)
+        {
+            var result = (ulong)0;
+            if(!ulong.TryParse(self, out result)) 
+                throw new System.Exception($"Number {self} is bad");
+            return result;
+        }
+
         internal static long[] ToLong(this string[] self)
         {
             return self.Select(x => x.ToLong()).ToArray();
