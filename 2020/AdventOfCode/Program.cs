@@ -10,7 +10,7 @@ namespace AdventOfCode
         {
             Console.WriteLine("Tell me the day!");
             // var day = Console.ReadLine();
-            var day = "14.2";
+            var day = "16.2";
 
             if(day == "1")
             {
@@ -142,6 +142,18 @@ namespace AdventOfCode
             {
                 var numbers = new int[]{0,1,5,10,3,12,19};
                 var  result = SpeakingGame.GetPosition(numbers, 30000000);
+                Console.WriteLine(result);
+            }
+            else if(day == "16")
+            {
+                var lines = FileReader.ReadFile(@"../../../input16.txt").ToArray();
+                var result = TicketTranslation.GetScanningErrorRate(lines);
+                Console.WriteLine(result);
+            }
+            else if(day == "16.2")
+            {
+                var lines = FileReader.ReadFile(@"../../../input16.txt").ToArray();
+                var result = TicketTranslation.GetMultiplied6Values(lines);
                 Console.WriteLine(result);
             }
             else 

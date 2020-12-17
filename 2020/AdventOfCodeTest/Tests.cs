@@ -423,5 +423,57 @@ namespace AdventOfCodeTest
             yield return new object[] { 18,3,2,1};
             yield return new object[] { 362,3,1,2};
         }
+
+        [Fact]
+        public void Test16()
+        {
+            var lines = new string[]
+            {
+                "class: 1-3 or 5-7",
+                "row: 6-11 or 33-44",
+                "seat: 13-40 or 45-50",
+                Environment.NewLine,
+                "your ticket:",
+                "7,1,14",
+                Environment.NewLine,
+                "nearby tickets:",
+                "7,3,47",
+                "40,4,50",
+                "55,2,20",
+                "38,6,12",
+            };
+            
+            Assert.Equal(71, TicketTranslation.GetScanningErrorRate(lines));
+        }
+
+        [Fact]
+        public void Test16_Part2()
+        {
+            
+            var lines = new string[]
+            {
+                "class: 0-1 or 4-19",
+                "row: 0-5 or 8-19",
+                "seat: 0-13 or 16-19",
+                Environment.NewLine,
+                "your ticket:",
+                "11,12,13",
+                Environment.NewLine,
+                "nearby tickets:",
+                "3,9,18",
+                "15,1,5",
+                "5,14,9",
+            };
+            
+            var result = TicketTranslation.GetFieldPositions(lines);
+
+            Assert.Equal("seat", result[0].Field);
+            Assert.Equal("class", result[1].Field);
+            Assert.Equal("row", result[2].Field);
+
+            Assert.Equal(2, result[0].PossiblePositions[0]);
+            Assert.Equal(1, result[1].PossiblePositions[0]);
+            Assert.Equal(0, result[2].PossiblePositions[0]);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode
@@ -43,6 +44,15 @@ namespace AdventOfCode
             var result = (long)0;
             if(!long.TryParse(self, out result)) 
                 throw new System.Exception($"Number {self} is bad");
+            return result;
+        }
+
+        internal static int Multiply(this IEnumerable<int> self)
+        {
+            var result = 1;
+            foreach(var x in self)
+                result = result * x;
+
             return result;
         }
     }
