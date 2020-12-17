@@ -10,7 +10,7 @@ namespace AdventOfCode
         {
             Console.WriteLine("Tell me the day!");
             // var day = Console.ReadLine();
-            var day = "12";
+            var day = "12.2";
 
             if(day == "1")
             {
@@ -123,7 +123,13 @@ namespace AdventOfCode
             else if(day == "12")
             {
                 var lines = FileReader.ReadFile(@"../../../input12.txt").ToArray();
-                var  result = RainRisk.GetManhattanDistance(lines, 90);
+                var  result = RainRisk.GetPositionOfBoat(lines, 90);
+                Console.WriteLine(result);
+            }
+            else if(day == "12.2")
+            {
+                var lines = FileReader.ReadFile(@"../../../input12.txt").ToArray();
+                var  result = RainRisk.GetPositionOfBoat_WithVector(lines);
                 Console.WriteLine(result);
             }
             else if(day == "14")

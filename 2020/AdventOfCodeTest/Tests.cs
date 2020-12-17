@@ -366,8 +366,16 @@ namespace AdventOfCodeTest
         public void Test12()
         {
             var lines = new string[]{"F10","N3","F7","R90","F11"};
-            var result = RainRisk.GetManhattanDistance(lines, 90);
+            var result = RainRisk.GetPositionOfBoat(lines, 90);
             Assert.Equal(25, result);
+        }
+
+        [Fact]
+        public void Test12_Part2()
+        {
+            var lines = new string[]{"F10","N3","F7","R90","F11"};
+            var result = RainRisk.GetPositionOfBoat_WithVector(lines);
+            Assert.Equal(286, result);
         }
 
         [Fact]

@@ -6,17 +6,19 @@ namespace AdventOfCode
     public static class RainRisk
     {
         private const string RegexInstruction = @"^(\w)([0-9]+)$";
-        public static int GetManhattanDistance(string[] lines, int START_DIRECTION)
+
+        
+        public static int GetPositionOfBoat(string[] lines, int START_DIRECTION)
         {
             var direction = START_DIRECTION;
             var regex = new Regex(RegexInstruction);
-            var position = new Position(0,0);
+            var position = new Coordinate(0, 0);
 
-            foreach(var line in lines)
+            foreach (var line in lines)
             {
                 var instruction = GetInstruction(line, regex);
 
-                switch(instruction.InstructionType)
+                switch (instruction.InstructionType)
                 {
                     case 'N':
                         position.Y += instruction.Value;
@@ -44,10 +46,70 @@ namespace AdventOfCode
                 Console.WriteLine($"Instruction: {line}. Current position: [{position.X},{position.Y}]");
             }
 
+            return GetManhattanDistance(position);
+        }
+
+        public static int GetPositionOfBoat_WithVector(string[] lines)
+        {
+            var regex = new Regex(RegexInstruction);
+            var boatPosition = new Coordinate(0,0);
+            var wayPointVector = new Coordinate(10,1);
+
+            foreach (var line in lines)
+            {
+                var instruction = GetInstruction(line, regex);
+
+                switch (instruction.InstructionType)
+                {
+                    case 'N':
+                        wayPointVector.Y += instruction.Value;
+                        break;
+                    case 'S':
+                        wayPointVector.Y -= instruction.Value;
+                        break;
+                    case 'E':
+                        wayPointVector.X += instruction.Value;
+                        break;
+                    case 'W':
+                        wayPointVector.X -= instruction.Value;
+                        break;
+                    case 'L':
+                        wayPointVector = wayPointVector.MoveDirection(360 - instruction.Value);
+                        break;
+                    case 'R':
+                        wayPointVector = wayPointVector.MoveDirection(instruction.Value);
+                        break;
+                    case 'F':
+                        boatPosition = GetForward(boatPosition, instruction, wayPointVector);
+                        break;
+                }
+            }
+            
+            return GetManhattanDistance(boatPosition);
+        }
+
+        private static Coordinate MoveDirection(this Coordinate direction, int value)
+        {
+            value = value % 360;
+
+            if(value == 0)
+                return direction;
+            if(value == 90)
+                return new Coordinate(direction.Y, -direction.X);
+            if(value == 180)
+                return new Coordinate(-direction.X, -direction.Y);
+            if(value == 270)
+                return new Coordinate(-direction.Y, direction.X);
+            else
+                throw new Exception($"Instruction value {value} is not valid");
+        }
+
+        private static int GetManhattanDistance(Coordinate position)
+        {
             return Math.Abs(position.X) + Math.Abs(position.Y);
         }
 
-        private static Position GetForward(Position position, Instruction instruction, int direction)
+        private static Coordinate GetForward(Coordinate position, Instruction instruction, int direction)
         {
             if(direction == 0 || direction == 180)
                 position.Y += direction == 0 ? instruction.Value : (-1)*instruction.Value;
@@ -57,6 +119,11 @@ namespace AdventOfCode
                 throw new Exception($"Invalid direction: {direction}");
             
             return position;
+        }
+
+        private static Coordinate GetForward(Coordinate boardPosition, Instruction instruction, Coordinate wayPointVector)
+        {
+            return wayPointVector.MultiplyBy(instruction.Value).Sum(boardPosition);
         }
 
         private static Instruction GetInstruction(string line, Regex regex)
@@ -72,6 +139,16 @@ namespace AdventOfCode
                 Value = match.Groups[2].Value.ToInt(),
             };
         }
+
+        private static Coordinate MultiplyBy(this Coordinate coordinate, int multiplicator)
+        {
+            return new Coordinate(coordinate.X * multiplicator, coordinate.Y * multiplicator);
+        }
+
+        private static Coordinate Sum(this Coordinate c1, Coordinate c2)
+        {
+            return new Coordinate(c1.X + c2.X, c1.Y + c2.Y);
+        }
     }
 
     internal class Instruction
@@ -80,9 +157,9 @@ namespace AdventOfCode
         public int Value { get; set; }
     }
     
-    internal class Position
+    internal class Coordinate
     {
-        public Position(int x, int y)
+        public Coordinate(int x, int y)
         {
             X = x;
             Y = y;
