@@ -379,6 +379,15 @@ namespace AdventOfCodeTest
         }
 
         [Fact]
+        public void Test13()
+        {
+            var lines = new string[]{"939","7,13,x,x,59,x,31,19"};
+
+            var result = ShuttleSearch.GetMultipliedWaitingTimeById(lines);
+            Assert.Equal(295, result);
+        }
+
+        [Fact]
         public void Test14()
         {
             var lines = new string[]
@@ -490,6 +499,20 @@ namespace AdventOfCodeTest
             Assert.Equal(2, result[0].PossiblePositions[0]);
             Assert.Equal(1, result[1].PossiblePositions[0]);
             Assert.Equal(0, result[2].PossiblePositions[0]);
+        }
+
+        [Fact]
+        public void Test17()
+        {
+            var lines = new string[]
+            {
+                ".#.",
+                "..#",
+                "###",
+            };
+
+            var result = ConwayCubes.GetActiveCubes(lines);
+            Assert.Equal(112, result);
         }
     }
 }
